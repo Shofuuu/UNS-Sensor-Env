@@ -11,6 +11,9 @@ DHTesp dht;
 const char *thingspeak_api_key = "JKLA2H9G3TV3K9NQ";
 const char *thingspeak_url = "http://api.thingspeak.com/update";
 
+const char *field_temperature = "&field1=";
+const char *field_humidity = "&field2=";
+
 struct dht_data {
   float temperature;
   float humidity;
@@ -59,9 +62,9 @@ void dht_get_request_http (void *pvParameters) {
                 String url = thingspeak_url;
                 url += "?api_key=";
                 url += thingspeak_api_key;
-                url += "&field1=";
+                url += field_temperature;
                 url += String(dht.getTemperature());
-                url += "&field2=";
+                url += field_humidity;
                 url += String(dht.getHumidity());
 
                 http.begin(url);
